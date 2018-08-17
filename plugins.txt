@@ -8,7 +8,6 @@ bouncycastle-api:2.16.3
 blueocean:1.7.1
 branch-api:2.0.20
 build-timeout:1.19
-bulk-builder:1.5
 clone-workspace-scm:0.6
 cloudbees-folder:6.5.1
 command-launcher:1.2
@@ -30,7 +29,6 @@ github:1.29.2
 github-api:1.92
 github-branch-source:2.3.6
 github-oauth:0.29
-gitlab-hook:1.4.2
 gitlab-oauth:1.4
 gitlab-plugin:1.5.9
 git-server:1.7
@@ -75,6 +73,7 @@ ruby-runtime:0.12
 run-condition:1.0
 scm-api:2.2.7
 script-security:1.44
+slack:2.3
 sonar:2.8
 ssh-credentials:1.14
 ssh-slaves:1.26
