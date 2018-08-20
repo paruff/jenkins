@@ -11,11 +11,11 @@ RUN apt-get update \
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/#set-up-the-repository      
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 RUN apt-key fingerprint 0EBFCD88
-RUN add-apt-repository \
+RUN sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
-RUN apt-get install docker-ce
+RUN sudo apt-get install docker-ce
 
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 RUN usermod -a -G docker jenkins
