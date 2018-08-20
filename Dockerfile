@@ -9,24 +9,24 @@ RUN apt-get update \
       software-properties-common\
       && rm -rf /var/lib/apt/lists/*
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/#set-up-the-repository      
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-RUN apt-key fingerprint 0EBFCD88
-RUN add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+# RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# RUN apt-key fingerprint 0EBFCD88
+# RUN add-apt-repository \
+#    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+#    $(lsb_release -cs) \
+#    stable"
 
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
-RUN usermod -a -G docker jenkins
+
 
 # getting the docker-cli
 # --- Attention: docker.sock needs to be mounted as volume in docker-compose.yml
 # see: https://issues.jenkins-ci.org/browse/JENKINS-35025
 # see: https://get.docker.com/builds/
 # see: https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Custom+Build+Environment+Plugin#CloudBeesDockerCustomBuildEnvironmentPlugin-DockerinDocker
-# RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
-# RUN chmod +x /bin/docker
-
+ RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
+ RUN chmod +x /bin/docker
+RUN usermod -a -G docker jenkins
 
 
 USER jenkins
