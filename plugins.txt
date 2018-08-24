@@ -41,6 +41,7 @@ handlebars:1.1.1
 icon-shim:2.0.3
 jackson2-api:2.8.11.3
 javadoc:1.4
+jclouds-jenkins:2.14
 jdk-tool:1.1
 jobConfigHistory:2.18
 job-dsl:1.70
