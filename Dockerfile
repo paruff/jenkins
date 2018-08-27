@@ -17,6 +17,24 @@ RUN apt-get update \
 #    stable"
 # RUN sudo apt-get install docker-ce
 
+RUN apt update
+RUN apt install apt-transport-https ca-certificates curl software-properties-common -y
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+RUN apt update -y
+RUN apt-cache policy docker-ce
+RUN apt install docker-ce -y
+# RUN sudo systemctl status docker
+
+# RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+# RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+# RUN apt-get update
+# RUN apt-cache policy docker-ce
+# RUN apt-get install -y docker-ce
+# RUN systemctl status docker
+
+RUN sudo usermod -aG docker jenkins
+
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 # RUN usermod -a -G docker jenkins
 
@@ -25,8 +43,8 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 # see: https://issues.jenkins-ci.org/browse/JENKINS-35025
 # see: https://get.docker.com/builds/
 # see: https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Custom+Build+Environment+Plugin#CloudBeesDockerCustomBuildEnvironmentPlugin-DockerinDocker
-RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
-RUN chmod +x /bin/docker
+# RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
+# RUN chmod +x /bin/docker
 
 USER jenkins
 
