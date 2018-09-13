@@ -15,15 +15,15 @@ RUN apt-get update \
 #    stable"
 # RUN sudo apt-get install docker-ce
 
-RUN apt update
-RUN apt install apt-transport-https ca-certificates curl software-properties-common -y
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-RUN apt update -y
-RUN apt-cache policy docker-ce
-RUN apt install docker-ce -y
-# RUN sudo systemctl status docker
-RUN systemctl enable docker.service
+# RUN apt update
+# RUN apt install apt-transport-https ca-certificates curl software-properties-common -y
+# RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+# RUN apt update -y
+# RUN apt-cache policy docker-ce
+# RUN apt install docker-ce -y
+# # RUN sudo systemctl status docker
+# RUN systemctl enable docker.service
 # RUN update-rc.d dockerd defaults
 
 # RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -32,6 +32,22 @@ RUN systemctl enable docker.service
 # RUN apt-cache policy docker-ce
 # RUN apt-get install -y docker-ce
 # RUN systemctl status docker
+
+ # from https://getintodevops.com/blog/the-simple-way-to-run-docker-in-docker-for-ci
+RUN apt-get update && \
+ apt-get -y install apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common && \
+ curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+ add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable" && \
+ apt-get update && \
+ apt-get -y install docker-ce
+
 
 RUN sudo usermod -aG docker jenkins
 
